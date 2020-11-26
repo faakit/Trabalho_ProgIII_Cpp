@@ -3,20 +3,23 @@
 #include <map>
 #include "dominio/periodo.h"
 #include "dominio/disciplina.h"
+#include "io/memoria.h"
 
 using namespace dominio;
 using namespace std;
+using namespace io;
 
 int main() {
+    auto* memoriaObj = new memoria();
     map<string,periodo> mapaPeriodos;
     map<string,disciplina> mapaDisciplinas;
     map<string,docente> mapaDocentes;
     map<string,estudante> mapaEstudantes;
 
     auto* novoPeriodo = new periodo(2000, '1');
-    mapaPeriodos.emplace(novoPeriodo->toString() , *novoPeriodo);
+    memoriaObj->setPeriodo(novoPeriodo);
 
-    for(auto & mapaPeriodo : mapaPeriodos){
+    for(auto & mapaPeriodo : memoriaObj->getPeriodos()){
         cout << "chave: " << mapaPeriodo.first << endl;
         cout << "valor: " << mapaPeriodo.second.toString() << endl;
     }

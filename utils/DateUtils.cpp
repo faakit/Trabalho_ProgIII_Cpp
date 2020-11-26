@@ -17,6 +17,7 @@ using namespace std;
 /* Maximum size of the string buffer used to format dates. */
 #define MAX_DATE_STRING_SIZE 100
 
+// Código que imita o strptime no windows
 extern "C" char* strptime(const char* s,
                           const char* f,
                           struct tm* tm) {
