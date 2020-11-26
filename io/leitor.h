@@ -6,6 +6,7 @@
 #include "../utils/Tokenizer.h"
 #include "../utils/StringUtils.h"
 #include "exception.h"
+#include "../dominio/disciplina.h"
 using namespace utils;
 
 using namespace std;
