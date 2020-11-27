@@ -17,16 +17,24 @@ int main() {
     auto* csvLeitor = new leitor(memoriaObj);
     try {
         csvLeitor->lerPeriodos("periodos.csv");
-    } catch (dadoException e){
+        csvLeitor->lerDocentes("docentes.csv");
+        csvLeitor->lerDisciplinas("disciplinas.csv");
+        csvLeitor->lerEstudantes("estudantes.csv");
+    } catch (dadoException &e){
         cout << e.what() << endl;
     }
 
     auto* novoPeriodo = new periodo(2000, '1');
     memoriaObj->setPeriodo(novoPeriodo);
 
-    for(auto & mapaPeriodo : memoriaObj->getPeriodos()){
-        cout << "chave: " << mapaPeriodo.first << endl;
-        cout << "valor: " << mapaPeriodo.second.toString() << endl;
+    for(auto & mapaEstudante : memoriaObj->getEstudantes()){
+        cout << "chave: " << mapaEstudante.first << endl;
+        cout << "valor: " << mapaEstudante.second->getNome() << endl;
+    }
+
+    for(auto & mapaDisciplina : memoriaObj->getDisciplinas()){
+        cout << "chave: " << mapaDisciplina.first << endl;
+        cout << "valor: " << mapaDisciplina.second->toString() << endl;
     }
 
 

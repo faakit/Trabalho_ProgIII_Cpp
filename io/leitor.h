@@ -22,6 +22,9 @@ namespace io {
         void lerDisciplinas(const string& filename);
         void lerDocentes(const string& filename);
         void lerEstudantes(const string& filename);
+        void lerMatriculas(const string& filename);
+        void lerAtividades(const string& filename);
+        void lerAvaliacoes(const string& filename);
     };
 }
 
