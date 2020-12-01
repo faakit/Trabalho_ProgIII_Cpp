@@ -7,10 +7,14 @@
 #include "../utils/StringUtils.h"
 #include "exception.h"
 #include "../dominio/disciplina.h"
-using namespace utils;
+#include "../dominio/aula.h"
+#include "../dominio/estudo.h"
+#include "../dominio/trabalho.h"
+#include "../dominio/prova.h"
 
+using namespace utils;
 using namespace std;
-#include <iostream>
+
 
 namespace io {
     class leitor {

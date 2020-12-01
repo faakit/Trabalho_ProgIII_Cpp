@@ -9,7 +9,7 @@ namespace dominio {
         map<string, string> materiais;
 
     public:
-        estudo(int numero, string nome, const map<string, string>& materiais);
+        estudo(int numero, string nome);
         map<string, string> getMateriais() const;
         void addMateriais(const string& nome, const string& url);
     };

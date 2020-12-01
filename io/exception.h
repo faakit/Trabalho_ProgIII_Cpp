@@ -5,14 +5,6 @@
 using namespace std;
 
 namespace io {
-    class dataException : public exception {
-        string motivo;
-
-    public:
-        explicit dataException(string motivo);
-        const char * what() const noexcept override;
-    };
-
     class ioException : public exception{
         string motivo="Erro de I/O.";
     public:
@@ -44,7 +36,7 @@ namespace io {
     class matriculaException : public exception{
         string motivo="Matrícula repetida: ";
     public:
-        explicit matriculaException(string dado);
+        explicit matriculaException(string dado, const string& codigo);
         const char * what() const noexcept override;
     };
 

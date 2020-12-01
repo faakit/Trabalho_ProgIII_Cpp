@@ -7,7 +7,7 @@ namespace dominio{
         this->data = data;
     }
 
-    string aula::getData() const {
-        return utils::formatDate(this->data, utils::DATE_FORMAT_PT_BR_SHORT);
+    string aula::getData(const string& dateFormat) {
+        return utils::formatDate(this->data, dateFormat);
     }
 }

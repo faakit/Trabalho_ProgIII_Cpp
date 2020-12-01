@@ -7,8 +7,8 @@ namespace dominio{
         this->conteudo = std::move(conteudo);
     }
 
-    string prova::getData() const{
-        return utils::formatDate(this->data, utils::DATE_FORMAT_PT_BR_SHORT);
+    string prova::getData(const string& dateFormat){
+        return utils::formatDate(this->data, dateFormat);
     }
 
     string prova::getConteudo() const{

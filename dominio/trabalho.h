@@ -16,7 +16,7 @@ namespace dominio{
     public:
         trabalho(int numero, string nome, time_t data, int nAlunos, double cargaHoraria);
         int getNAlunos() const;
-        string getData() const;
+        string getData(const string& dateFormat) override;
     };
 }
 

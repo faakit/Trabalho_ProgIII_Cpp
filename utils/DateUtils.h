@@ -3,7 +3,7 @@
 #define DATEUTILS_H_
 
 #include <ctime>
-#include <time.h>
+#include <ctime>
 #include <string>
 
 namespace utils {
@@ -11,6 +11,7 @@ namespace utils {
 using namespace std;
 
 const string DATE_FORMAT_PT_BR_SHORT = "%d/%m/%Y";
+const string DATE_FORMAT_STRCMP = "%Y%m%d";
 
 /* Converts dates in human-readable format to machine-processable format for storing in objects. */
 time_t parseDate(const string& str, const string& formato);

@@ -11,7 +11,7 @@ namespace dominio {
 
     public:
         prova(int numero, string nome, time_t data, string conteudo);
-        string getData() const;
+        string getData(const string& dateFormat) override;
         string getConteudo() const;
     };
 }

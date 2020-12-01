@@ -2,14 +2,6 @@
 
 
 namespace io{
-    dataException::dataException(string motivo) {
-        this->motivo = move(motivo);
-    }
-
-    const char * dataException::what() const noexcept {
-        return motivo.c_str();
-    }
-
     const char * ioException::what() const noexcept {
         return motivo.c_str();
     }
@@ -43,8 +35,8 @@ namespace io{
     }
 
 
-    matriculaException::matriculaException(string dado) {
-        this->motivo = motivo + move(dado) + ".";
+    matriculaException::matriculaException(string dado, const string& codigo) {
+        this->motivo = motivo + move(dado) + "em" + codigo + ".";
     }
 
     const char *matriculaException::what() const noexcept {

@@ -11,7 +11,7 @@ namespace dominio{
         return this->nAlunos;
     }
 
-    string trabalho::getData() const {
-        return utils::formatDate(this->data, utils::DATE_FORMAT_PT_BR_SHORT);
+    string trabalho::getData(const string& dateFormat) {
+        return utils::formatDate(this->data, dateFormat);
     }
 }

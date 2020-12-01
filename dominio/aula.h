@@ -10,7 +10,7 @@ namespace dominio {
 
     public:
         aula(int numero, string nome, time_t data);
-        string getData() const;
+        string getData(const string& dateFormat) override;
     };
 }
 

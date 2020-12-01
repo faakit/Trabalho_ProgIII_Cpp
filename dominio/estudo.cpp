@@ -1,7 +1,7 @@
 #include "estudo.h"
 
 namespace dominio{
-    estudo::estudo(int numero, string nome, const map<string, string>& materiais):
+    estudo::estudo(int numero, string nome):
         atividade(numero, std::move(nome), false, 2){
     }
 

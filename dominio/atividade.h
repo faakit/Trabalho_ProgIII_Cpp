@@ -1,9 +1,9 @@
 #ifndef SISTEMACPP_ATIVIDADE_H
 #define SISTEMACPP_ATIVIDADE_H
 
-#include <string>
 #include <map>
 #include "nota.h"
+#include <cstring>
 
 using namespace std;
 
@@ -23,8 +23,10 @@ namespace dominio {
         map<string, nota*> getNotas() const;
         void addNota(const string& matricula, nota* notaDoAluno);
         bool isSincrona() const;
-        static string getData();
+        virtual string getData(const string& dateFormat);
         double getCargaHoraria() const;
+        bool existeNota(const string& matricula) const;
+        bool compareTo(atividade* o);
     };
 }
 
