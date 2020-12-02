@@ -28,6 +28,8 @@ int main() {
         csvLeitor->lerAtividades("atividades.csv");
         csvLeitor->lerAvaliacoes("avaliacoes.csv");
 
+        csvEscritor->visaoGeralPeriodo();
+       // csvEscritor->estatisticaDocentes();
         csvEscritor->estatisticaDisciplinasDocente();
     } catch (dadoException &e){
         cout << e.what() << endl;
@@ -48,5 +50,5 @@ int main() {
     }
     */
 
-
+    return 0;
 }

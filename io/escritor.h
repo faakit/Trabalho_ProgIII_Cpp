@@ -21,6 +21,8 @@ namespace io {
         const string separadorCSV=";";
         memoria* memoriaObj;
 
+        void printLine(ofstream& out, string *linhas);
+
     public:
         explicit escritor(memoria* memoriaObj);
         void visaoGeralPeriodo();

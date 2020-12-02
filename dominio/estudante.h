@@ -9,6 +9,7 @@
 using namespace std;
 
 namespace dominio {
+    class periodo;
     class disciplina;
     class estudante {
         string matricula;

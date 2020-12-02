@@ -10,6 +10,7 @@ namespace dominio {
         this->professor = professor;
         this->varPeriodo = varPeriodo;
         professor->addDisciplina(this);
+        varPeriodo->addDisciplina(this);
         this->cargaHoraria=0;
         this->nAtvSincronas=0;
     }

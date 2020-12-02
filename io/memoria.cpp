@@ -26,6 +26,7 @@ namespace io{
 
     void memoria::setDisciplina(disciplina *disciplina) {
         this->mapaDisciplinas.emplace(disciplina->toString(), disciplina);
+        
     }
 
     void memoria::setDocente(class docente *docente) {

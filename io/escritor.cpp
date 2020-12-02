@@ -2,18 +2,117 @@
 
 
 namespace io{
+    //Função facilitadora para printar as linhas do arquivo
+    void escritor::printLine(ofstream& out, string * linhas) {
+        for(int i = 0 ; i<linhas->size()+1; i++){
+            out << linhas[i];
+            if(i != linhas->size() ) out << separadorCSV;
+        }
+        out << endl;
+    }
 
     escritor::escritor(memoria *memoriaObj) {
         this->memoriaObj = memoriaObj;
     }
 
     void escritor::visaoGeralPeriodo() {
+        //Cria o arquivo e seu cabeçalho
+        ofstream out("1-visao-geral.csv");
+        out << cabecalhoVisaoGeral << endl;
 
+        //Cria lista de periodos e ordena
+        vector<periodo*> listaOrdenada;
+        for(auto & periodo : memoriaObj->getPeriodos()){
+            listaOrdenada.push_back(periodo.second);
+        }
+
+        sort(begin(listaOrdenada), end(listaOrdenada),
+             [](periodo* a, periodo* b){return  a->compareTo(b);});
+
+        for(auto & periodo : listaOrdenada){
+            //Cria lista com disciplinas do período
+            vector<disciplina*> disciplinasOrdenada = periodo->getDisciplinas();
+
+            //Organiza as disciplinas com uma função lambda de acordo com seu nome
+            sort(begin(disciplinasOrdenada), end(disciplinasOrdenada),
+                 [](disciplina* a, disciplina* b){return utils::stringCompare(a->getNome(), b->getNome());});
+
+            for(auto & i : disciplinasOrdenada){
+                //inicia um array de strings que serão as colunas da linha
+                string linhas[7];
+
+                linhas[0] = periodo->toString();
+                linhas[1] = i->getCodigo();
+                linhas[2] = i->getNome();
+                linhas[3] = i->getProfessor()->getNome();
+                linhas[4] = i->getProfessor()->getLogin();
+                linhas[5] = to_string(i->getAlunos().size());
+                linhas[6] = to_string(i->getNAtividades());
+
+                //printa a linha
+                printLine(out, linhas);
+            }
+
+        }
+
+        //fecha o arquivo
+        out.close();
     }
 
+    /*
     void escritor::estatisticaDocentes() {
+        //Cria o arquivo e seu cabeçalho
+        ofstream out("2-docentes.csv");
+        out << cabecalhoEstDocentes << endl;
 
-    }
+        //cria lista de docentes e organiza em ordem decrescente de nome com função lambda
+        vector<docente*> listaOrdenada;
+        for(auto & i : memoriaObj->getDocentes()){
+            listaOrdenada.push_back(i.second);
+        }
+        sort(begin(listaOrdenada), end(listaOrdenada),
+             [](docente* a, docente* b){return a->getNome() > b->getNome();});
+
+        for(auto & i : listaOrdenada){
+            //Inicializa alguns valores, o array de linhas e um buffer para formatação de string
+            double mediaAtivXDisciplina=0;
+            if(i->getNDisciplinas() != 0) {
+                mediaAtivXDisciplina = (double)i->getNAtividades()/i->getNDisciplinas();
+            }
+            double percentualSincXAssinc = 0;
+            if(i->getNAtividades() != 0) {
+                percentualSincXAssinc = (double)i->getNAtvSincronas()/i->getNAtividades() * 100;
+            }
+            double mediaNotas=0;
+            if(i->getNNotas() != 0){
+                mediaNotas = i->getTotalNotas()/i->getNNotas();
+            }
+
+            string linhas[7];
+            char buffer[10];
+
+            linhas[0] = i->getNome();
+            linhas[1] = to_string(i->getNDisciplinas());
+            linhas[2] = to_string(i->getPeriodos().size());
+            sprintf(buffer, "%.1f", mediaAtivXDisciplina);
+            linhas[3] = buffer;
+            sprintf(buffer, "%.0f%%", percentualSincXAssinc);
+            linhas[4] = buffer;
+            if(i->getNAtividades() == 0) linhas[5] = "0%";
+            else {
+                sprintf(buffer, "%.0f%%", (100 - percentualSincXAssinc));
+                linhas[5] = buffer;
+            }
+            sprintf(buffer, "%.1f" , mediaNotas);
+            linhas[6] = buffer;
+
+            //printa a linha no arquivo
+            printLine(out, linhas);
+        }
+
+        //fecha o arquivo
+        out.close();
+    } */
 
     void escritor::estatisticaEstudantes() {
 
@@ -43,22 +142,24 @@ namespace io{
             sort(begin(listaAtividades), end(listaAtividades),
                  [](atividade* a, atividade* b) { return a->compareTo(b); });
 
-            double porcentagemSincXAsinc = 100* (double)i->getNAtvSincronas()/i->getNAtividades();
+            double porcentagemSincXAsinc=0;
+            if(i->getNAtividades() != 0) {
+                porcentagemSincXAsinc = 100 * (double) i->getNAtvSincronas() / i->getNAtividades();
+            }
 
-            string linhas[9];
+            //inicia um buffer para formatar strings e um array de strings que serão as colunas da linha
             char buffer[20];
+            string linhas[9];
 
             linhas[0] = i->getProfessor()->getLogin();
             linhas[1] = i->getPeriodo()->toString();
             linhas[2] = i->getCodigo();
             linhas[3] = i->getNome();
             linhas[4] = to_string(i->getNAtividades());
-            if(i->getNAtividades() == 0) linhas[5] = "0%";
-            else {sprintf(buffer, "%.0f%%", porcentagemSincXAsinc);
-                linhas[5] = buffer; }
-            if(i->getNAtividades() == 0) linhas[6] = "0%";
-            else {sprintf(buffer, "%.0f%%", 100 - porcentagemSincXAsinc);
-                linhas[6] = buffer; }
+            sprintf(buffer, "%.0f%%", porcentagemSincXAsinc);
+                linhas[5] = buffer;
+            sprintf(buffer, "%.0f%%", 100 - porcentagemSincXAsinc);
+                linhas[6] = buffer;
             sprintf(buffer, "%.0f", i->getCargaHoraria());
             linhas[7] = buffer;
             linhas[8] = "";
@@ -67,12 +168,18 @@ namespace io{
             }
             trim(linhas[8]);
 
-            //Escreve a linha inteira e pula linha ao final
-            out << linhas[0] << separadorCSV << linhas[1] << separadorCSV << linhas[2] << separadorCSV <<linhas[3]<<
-                separadorCSV << linhas[4] << separadorCSV << linhas[5]<< separadorCSV <<linhas[6]<< separadorCSV <<
-                linhas[7] << separadorCSV << linhas[8] << endl;
+            //Escreve a linha       !!! printLine não está funcionando aqui, por algum motivo a linha não
+            //                      !!! é passada após a primeira disciplina (SIGSEGV SEGMENTATION FAULT)
+            for(int i = 0 ; i<9; i++){
+                out << linhas[i];
+                if(i != 8 ) out << separadorCSV;
+            }
+            out << endl;
         }
 
+        //fecha o arquivo
         out.close();
     }
+
+
 }
