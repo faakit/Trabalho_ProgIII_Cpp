@@ -18,6 +18,10 @@ namespace io{
     void escritor::visaoGeralPeriodo() {
         //Cria o arquivo e seu cabeçalho
         ofstream out("1-visao-geral.csv");
+        if (! out.good()) {
+            out.close();
+            throw ioException();
+        }
         out << cabecalhoVisaoGeral << endl;
 
         //Cria lista de periodos e ordena
@@ -62,6 +66,10 @@ namespace io{
     void escritor::estatisticaDocentes() {
         //Cria o arquivo e seu cabeçalho
         ofstream out("2-docentes.csv");
+        if (! out.good()) {
+            out.close();
+            throw ioException();
+        }
         out << cabecalhoEstDocentes << endl;
 
         //cria lista de docentes e organiza em ordem decrescente de nome com função lambda
@@ -102,7 +110,7 @@ namespace io{
                 sprintf(buffer, "%.0f%%", (100 - percentualSincXAssinc));
                 linhas[5] = buffer;
             }
-            sprintf(buffer, "%.1f" , mediaNotas);
+            sprintf(buffer, "%.1f" , round(mediaNotas * 10.)/10.);
             linhas[6] = buffer;
 
             //Escreve a linha       !!! printLine não está funcionando aqui, por algum motivo a linha não
@@ -121,6 +129,10 @@ namespace io{
     void escritor::estatisticaEstudantes() {
         //Cria o arquivo e seu cabeçalho
         ofstream out("3-estudantes.csv");
+        if (! out.good()) {
+            out.close();
+            throw ioException();
+        }
         out << cabecalhoEstEst << endl;
 
         //Cria lista de estudantes e ordena
@@ -146,7 +158,7 @@ namespace io{
             }
             if (i->getDisciplinas().empty()) linhas[3] = "0,0";
             else{
-                sprintf(buffer, "%.1f", (double)i->getNAvaliacoes()/i->getDisciplinas().size());
+                sprintf(buffer, "%.1f", round((double)i->getNAvaliacoes()/i->getDisciplinas().size() * 10.)/10.  );
                 linhas[3] = buffer;
             }
             if(i->getNAvaliacoes() ==0) linhas[4] = "0,0";
@@ -168,6 +180,10 @@ namespace io{
     void escritor::estatisticaDisciplinasDocente() {
         //Cria o arquivo e seu cabeçalho
         ofstream out("4-disciplinas.csv");
+        if (! out.good()) {
+            out.close();
+            throw ioException();
+        }
         out << cabecalhoEstDisDoc << endl;
 
         //Cria a lista e organiza com função lambda que chama função de comparação do objeto

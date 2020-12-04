@@ -8,6 +8,8 @@
 #include "../utils/StringUtils.h"
 #include "../dominio/aula.h"
 #include "../dominio/trabalho.h"
+#include "exception.h"
+#include <cmath>
 
 using namespace utils;
 using namespace std;
