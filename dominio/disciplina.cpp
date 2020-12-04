@@ -35,6 +35,7 @@ namespace dominio {
         this->atividades.emplace(varAtividade->getNumero()+1, varAtividade);
         if(varAtividade->isSincrona()) this->nAtvSincronas++;
         this->cargaHoraria += varAtividade->getCargaHoraria();
+        this->professor->addAtividade(varAtividade);
     }
 
     map<string, estudante *> disciplina::getAlunos() {
@@ -56,7 +57,7 @@ namespace dominio {
 
     bool disciplina::compareTo(disciplina *o) {
         return (this->varPeriodo->toString() < o->varPeriodo->toString() ||
-                (this->varPeriodo->toString() < o->varPeriodo->toString()) && (this->codigo < o->codigo));
+                (this->varPeriodo->toString() == o->varPeriodo->toString()) && (this->codigo < o->codigo));
     }
 
     map<int, atividade *> disciplina::getAtividades() {

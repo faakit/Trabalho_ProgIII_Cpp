@@ -29,7 +29,8 @@ int main() {
         csvLeitor->lerAvaliacoes("avaliacoes.csv");
 
         csvEscritor->visaoGeralPeriodo();
-       // csvEscritor->estatisticaDocentes();
+        csvEscritor->estatisticaDocentes();
+        csvEscritor->estatisticaEstudantes();
         csvEscritor->estatisticaDisciplinasDocente();
     } catch (dadoException &e){
         cout << e.what() << endl;

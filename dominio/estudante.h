@@ -5,6 +5,7 @@
 #include "disciplina.h"
 #include <list>
 #include <set>
+#include "../utils/StringUtils.h"
 
 using namespace std;
 
@@ -30,6 +31,7 @@ namespace dominio {
         int getNAvaliacoes() const;
         list<disciplina*> getDisciplinas() const;
         void addDisciplina(disciplina* varDisciplina);
+        bool compareTo(estudante* o);
     };
 }
 

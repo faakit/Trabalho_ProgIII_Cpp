@@ -304,10 +304,11 @@ namespace io{
                 getAtividade(stoi(nAtividade))->existeNota(matricula))
                 throw atividadeException(matricula, nAtividade, codigo);
 
+            //Adiciona nota à atividade e ao professor
             auto* novaNota = new nota(memoriaObj->getEstudantes().find(matricula)->second, stod(notaStr));
             memoriaObj->getDisciplinas().find(codigo)->second->
                 getAtividade(stoi(nAtividade))->addNota(matricula, novaNota);
-
+            memoriaObj->getDisciplinas().find(codigo)->second->getProfessor()->addNota(novaNota);
         }
         in.close();
     }

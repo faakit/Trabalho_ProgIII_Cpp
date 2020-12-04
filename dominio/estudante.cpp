@@ -44,4 +44,9 @@ namespace dominio {
         this->disciplinas.push_back(varDisciplina);
         this->periodos.emplace(varDisciplina->getPeriodo());
     }
+
+    bool estudante::compareTo(estudante *o) {
+        return (o->nAvaliacoes <  this->nAvaliacoes ||
+                 ((o->nAvaliacoes == this->nAvaliacoes) && utils::stringCompare(this->nome, o->nome)));
+    }
 }

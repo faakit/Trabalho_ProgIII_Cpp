@@ -31,7 +31,7 @@ namespace dominio {
 
     bool periodo::compareTo(periodo *o) {
         return (this->ano < o->ano ||
-                (this->ano < o->ano && this->semestre < o->semestre));
+                (this->ano == o->ano && this->semestre < o->semestre));
     }
 
     periodo::~periodo() = default;

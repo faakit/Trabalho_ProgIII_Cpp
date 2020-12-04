@@ -3,17 +3,27 @@
 
 #include <string>
 #include <vector>
+#include <set>
 #include "disciplina.h"
 
 using namespace std;
 
 namespace dominio {
+    class atividade;
+    class nota;
+    class periodo;
     class disciplina;
     class docente {
         string login;
         string nome;
         string website;
         vector<disciplina*> disciplinas;
+        set<periodo*> periodos;
+        int nDisciplinas;
+        int nAtividades;
+        int nAtividadesSincronas;
+        int nNotas;
+        double totalNotas;
 
     public:
         docente(string login, string nome, string website);
@@ -21,6 +31,14 @@ namespace dominio {
         string getLogin() const;
         string getNome() const;
         string getWebsite() const;
+        void addAtividade(atividade *i);
+        int getNDisciplinas() const;
+        int getNAtvSincronas() const;
+        double getNAtividades() const;
+        set<periodo*> getPeriodos () const;
+        void addNota(nota* i);
+        int getNNotas() const;
+        double getTotalNotas() const;
     };
 } //namespace
 

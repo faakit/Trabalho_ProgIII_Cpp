@@ -8,6 +8,6 @@ namespace dominio{
     }
 
     string aula::getData(const string& dateFormat) {
-        return utils::formatDate(this->data, dateFormat);
+        return "";
     }
 }

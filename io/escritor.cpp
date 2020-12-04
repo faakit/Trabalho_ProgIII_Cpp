@@ -45,7 +45,7 @@ namespace io{
                 linhas[1] = i->getCodigo();
                 linhas[2] = i->getNome();
                 linhas[3] = i->getProfessor()->getNome();
-                linhas[4] = i->getProfessor()->getLogin();
+                linhas[4] = i->getProfessor()->getLogin() + "@ufes.br";
                 linhas[5] = to_string(i->getAlunos().size());
                 linhas[6] = to_string(i->getNAtividades());
 
@@ -59,7 +59,6 @@ namespace io{
         out.close();
     }
 
-    /*
     void escritor::estatisticaDocentes() {
         //Cria o arquivo e seu cabeçalho
         ofstream out("2-docentes.csv");
@@ -106,16 +105,64 @@ namespace io{
             sprintf(buffer, "%.1f" , mediaNotas);
             linhas[6] = buffer;
 
-            //printa a linha no arquivo
-            printLine(out, linhas);
+            //Escreve a linha       !!! printLine não está funcionando aqui, por algum motivo a linha não
+            //                      !!! é passada após a primeira disciplina (SIGSEGV SEGMENTATION FAULT)
+            for(int coluna = 0 ; coluna<7; coluna++){
+                out << linhas[coluna];
+                if(coluna != 6 ) out << separadorCSV;
+            }
+            out << endl;
         }
 
         //fecha o arquivo
         out.close();
-    } */
+    }
 
     void escritor::estatisticaEstudantes() {
+        //Cria o arquivo e seu cabeçalho
+        ofstream out("3-estudantes.csv");
+        out << cabecalhoEstEst << endl;
 
+        //Cria lista de estudantes e ordena
+        vector<estudante*> listaOrdenada;
+        for(auto& i : memoriaObj->getEstudantes()){
+            listaOrdenada.push_back(i.second);
+        }
+
+        sort(begin(listaOrdenada), end(listaOrdenada),
+             [](estudante* a, estudante* b) { return a->compareTo(b); });
+
+        for(auto & i : listaOrdenada){
+            //Inicializa o array de linhas e o buffer para formatação de string
+            string linhas[5];
+            char buffer[10];
+
+            linhas[0] = i->getMatricula();
+            linhas[1] = i->getNome();
+            if ( i->getNPeriodos() == 0 ) linhas[2] = "0,0";
+            else{
+                sprintf(buffer, "%.1f", (double)i->getDisciplinas().size()/i->getNPeriodos());
+                linhas[2] = buffer;
+            }
+            if (i->getDisciplinas().empty()) linhas[3] = "0,0";
+            else{
+                sprintf(buffer, "%.1f", (double)i->getNAvaliacoes()/i->getDisciplinas().size());
+                linhas[3] = buffer;
+            }
+            if(i->getNAvaliacoes() ==0) linhas[4] = "0,0";
+            else{
+                sprintf(buffer, "%.1f", (double)i->getTotalAvaliacoes()/i->getNAvaliacoes());
+                linhas[4] = buffer;
+            }
+
+            //Escreve a linha       !!! printLine não está funcionando aqui, por algum motivo a linha não
+            //                      !!! é passada após a primeira disciplina (SIGSEGV SEGMENTATION FAULT)
+            for(int coluna = 0 ; coluna < 5; coluna++){
+                out << linhas[coluna];
+                if(coluna != 4 ) out << separadorCSV;
+            }
+            out << endl;
+        }
     }
 
     void escritor::estatisticaDisciplinasDocente() {
@@ -170,9 +217,9 @@ namespace io{
 
             //Escreve a linha       !!! printLine não está funcionando aqui, por algum motivo a linha não
             //                      !!! é passada após a primeira disciplina (SIGSEGV SEGMENTATION FAULT)
-            for(int i = 0 ; i<9; i++){
-                out << linhas[i];
-                if(i != 8 ) out << separadorCSV;
+            for(int coluna = 0 ; coluna < 9; coluna++){
+                out << linhas[coluna];
+                if(coluna != 8 ) out << separadorCSV;
             }
             out << endl;
         }
