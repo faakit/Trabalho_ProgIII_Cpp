@@ -1,8 +1,6 @@
 #ifndef SISTEMACPP_MEMORIA_H
 #define SISTEMACPP_MEMORIA_H
 
-#include <map>
-#include <string>
 #include "../dominio/disciplina.h"
 
 using namespace std;

@@ -8,7 +8,7 @@ using namespace io;
 int main(int argc, char** argv) {
     try {
         //Pega o local do sistema operacional e inicia strings de argumentos
-        setlocale(LC_ALL, "");
+        setlocale(LC_ALL, "pt_BR");
         string csvPeriodos, csvDocentes, csvDisciplinas, csvEstudantes, csvMatriculas, csvAtividades, csvAvaliacoes;
 
         //Checa o nome dos arquivos e a existência das flags

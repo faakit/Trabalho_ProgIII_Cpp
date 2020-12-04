@@ -1,6 +1,5 @@
 #include "escritor.h"
 
-
 namespace io{
     //Função facilitadora para printar as linhas do arquivo
     void escritor::printLine(ofstream& out, string * linhas) {
@@ -78,7 +77,7 @@ namespace io{
             listaOrdenada.push_back(i.second);
         }
         sort(begin(listaOrdenada), end(listaOrdenada),
-             [](docente* a, docente* b){return a->getNome() > b->getNome();});
+             [](docente* a, docente* b){return stringCompare(b->getNome(), a->getNome());});
 
         for(auto & i : listaOrdenada){
             //Inicializa alguns valores, o array de linhas e um buffer para formatação de string
@@ -221,7 +220,8 @@ namespace io{
             linhas[4] = to_string(i->getNAtividades());
             sprintf(buffer, "%.0f%%", porcentagemSincXAsinc);
                 linhas[5] = buffer;
-            sprintf(buffer, "%.0f%%", 100 - porcentagemSincXAsinc);
+            sprintf(buffer, "%.0f%%", (100 - porcentagemSincXAsinc));
+            if (porcentagemSincXAsinc == 0) sprintf(buffer, "0%%");
                 linhas[6] = buffer;
             sprintf(buffer, "%.0f", i->getCargaHoraria());
             linhas[7] = buffer;

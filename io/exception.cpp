@@ -36,7 +36,7 @@ namespace io{
 
 
     matriculaException::matriculaException(string dado, const string& codigo) {
-        this->motivo = motivo + move(dado) + "em" + codigo + ".";
+        this->motivo = motivo + move(dado) + " em " + codigo + ".";
     }
 
     const char *matriculaException::what() const noexcept {

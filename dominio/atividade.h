@@ -20,7 +20,7 @@ namespace dominio {
         atividade(int numero, string nome, bool sincrona, double cargaHoraria);
         string getNome() const;
         int getNumero() const;
-        map<string, nota*> getNotas() const;
+
         void addNota(const string& matricula, nota* notaDoAluno);
         bool isSincrona() const;
         virtual string getData(const string& dateFormat);

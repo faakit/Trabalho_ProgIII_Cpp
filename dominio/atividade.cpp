@@ -16,10 +16,6 @@ namespace dominio{
         return this->numero;
     }
 
-    map<string, nota*> atividade::getNotas() const {
-        return this->notas;
-    }
-
     void atividade::addNota(const string& matricula, nota* notaDoAluno) {
         this->notas.emplace(matricula, notaDoAluno);
         this->notas.find(matricula)->second->getAluno()->incrementaAvaliacoes(notaDoAluno->getNota());

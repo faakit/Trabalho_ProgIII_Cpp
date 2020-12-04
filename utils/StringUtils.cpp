@@ -41,7 +41,7 @@ bool stringCompare(string s1, string s2) {
 bool isNumber(string& s) {
 	if (s.empty()) return false;
 	for (int i = 0; i < s.size(); i++)
-		if (! isdigit(s.at(i))) return false;
+		if (! (isdigit(s.at(i)) || s.at(i) == ',' || s.at(i) == '.' )) return false;  //Adiciona numeros com decimais ',' '.'
 	return true;
 }
 

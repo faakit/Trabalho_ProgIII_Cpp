@@ -25,7 +25,7 @@ namespace io{
             for (auto & i : vec) i = trim(i);
 
             if (! isNumber(vec[0])) throw dadoException(vec[0]);
-            if (vec[1].size() > 2) throw dadoException(vec[0]);
+            if (vec[1].size() > 2) throw dadoException(vec[1]);
 
             auto* novoPeriodo = new periodo(stoi(vec[0]), vec[1][0]);
 
@@ -96,7 +96,7 @@ namespace io{
 
             auto* novoDocente = new docente(vec[0], vec[1], vec[2]);
 
-            if(memoriaObj->getPeriodos().count(novoDocente->getLogin()) == 1 ) throw repetidoException(novoDocente->getLogin());
+            if(memoriaObj->getDocentes().count(novoDocente->getLogin()) == 1 ) throw repetidoException(novoDocente->getLogin());
 
             memoriaObj->setDocente(novoDocente);
         }
@@ -296,6 +296,7 @@ namespace io{
             string nAtividade = vec[2];
             string notaStr = vec[3];
 
+            if (!isNumber(notaStr)) throw dadoException(notaStr);
             if (!memoriaObj->existeDisciplina(codigo)) throw referenciaException(codigo);
             if (!memoriaObj->existeEstudante(matricula)) throw referenciaException(matricula);
             if (!memoriaObj->getDisciplinas().find(codigo)->second->existeAtividade(stoi(nAtividade)) )
