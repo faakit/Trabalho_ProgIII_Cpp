@@ -38,7 +38,7 @@ namespace io{
 
             //Organiza as disciplinas com uma função lambda de acordo com seu nome
             sort(begin(disciplinasOrdenada), end(disciplinasOrdenada),
-                 [](disciplina* a, disciplina* b){return utils::stringCompare(a->getNome(), b->getNome());});
+                 [](disciplina* a, disciplina* b){return stringCompare(a->getNome(), b->getNome());});
 
             for(auto & i : disciplinasOrdenada){
                 //inicia um array de strings que serão as colunas da linha
