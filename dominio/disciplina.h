@@ -16,6 +16,7 @@ namespace dominio {
     class estudante;
     class atividade;
     class disciplina {
+        //Classe com variáveis a mais que auxiliam na hora de produzir relatórios
         string codigo;
         string nome;
         docente* professor;

@@ -46,6 +46,8 @@ int main(int argc, char** argv) {
         //Caso não encontre todos argumentos fecha com um IOException
         if(achados != 7) throw ioException();
 
+
+        //Inicializa a memoria e lê os dados
         auto* memoriaObj = new memoria();
         auto* csvLeitor = new leitor(memoriaObj);
         csvLeitor->lerPeriodos(csvPeriodos);
@@ -57,13 +59,17 @@ int main(int argc, char** argv) {
         csvLeitor->lerAvaliacoes(csvAvaliacoes);
         delete csvLeitor;
 
+
+        //Escreve os relatórios
         auto* csvEscritor = new escritor(memoriaObj);
         csvEscritor->visaoGeralPeriodo();
         csvEscritor->estatisticaDocentes();
         csvEscritor->estatisticaEstudantes();
         csvEscritor->estatisticaDisciplinasDocente();
         delete csvEscritor;
+
     } catch (exception &e){
+        //Imprime o erro e retorna
         cout << e.what() << endl;
     }
 

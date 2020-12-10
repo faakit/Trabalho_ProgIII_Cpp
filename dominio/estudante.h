@@ -13,6 +13,7 @@ namespace dominio {
     class periodo;
     class disciplina;
     class estudante {
+        //Classe com variáveis a mais que auxiliam na hora de produzir relatórios
         string matricula;
         string nome;
         int nAvaliacoes;

@@ -8,6 +8,7 @@ using namespace dominio;
 
 namespace io {
     class memoria {
+        //Cria um mapa com as classes de base
         map<string,periodo*> mapaPeriodos;
         map<string,disciplina*> mapaDisciplinas;
         map<string,docente*> mapaDocentes;

@@ -16,6 +16,7 @@ using namespace std;
 
 namespace io {
     class escritor {
+        //Define strings constantes utilizadas em cabeçalhos e o divisor do CSV
         const string cabecalhoVisaoGeral="Período;Código Disciplina;Disciplina;Docente Responsável;E-mail Docente;Qtd. Estudantes;Qtd. Atividades";
         const string cabecalhoEstDocentes="Docente;Qtd. Disciplinas;Qtd. Períodos;Média Atividades/Disciplina;% Síncronas;% Assíncronas;Média de Notas";
         const string cabecalhoEstEst="Matrícula;Nome;Média Disciplinas/Período;Média Avaliações/Disciplina;Média Notas Avaliações";

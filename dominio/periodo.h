@@ -10,6 +10,7 @@ using namespace std;
 namespace dominio {
     class disciplina;
     class periodo {
+        //Classe com variáveis a mais que auxiliam na hora de produzir relatórios
         int ano;
         char semestre;
         vector<disciplina*> disciplinas;
